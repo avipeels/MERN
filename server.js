@@ -1,3 +1,14 @@
 var express = require('express');
-var app= express();
-var path = require(path);
+var app = express();
+var path = require('path');
+
+//middleware to define folder for static files
+app.use(express.static('public'))
+
+app.get('/', function (req, res) {
+  res.sendFile(path.resolve(__dirname))
+})
+
+app.listen(5000, function () {
+  console.log('listening on 5000');
+})
