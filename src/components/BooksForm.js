@@ -8,34 +8,35 @@ import ReactDOM from "react-dom";
 class BooksForm extends React.Component {
 
   handleSubmit(e) {
+    alert(e);
     const book = [{
-      title: ReactDOM.findDOMNode(this.title),
-      description: ReactDOM.findDOMNode(this.description),
-      price: ReactDOM.findDOMNode(this.price),
+      title: e.target.value,
+      description: this.description.value,
+      price: this.price.value,
     }];
     this.props.postBooks(book);
   }
   render() {
     return (
-      <Well>
-        <Panel>
-          <FormGroup controlId="title">
-            <ControlLabel>Title</ControlLabel>
-            <FormControl type="text" placeholder="title" ref="title"></FormControl>
-          </FormGroup>
+      <div className="well">
+        <div className="panel">
+          <div className="form-group" id="title">
+            <label>Title</label>
+            <input type="text" placeholder="title"></input>
+          </div>
 
-          <FormGroup controlId="description">
-            <ControlLabel>Description</ControlLabel>
-            <FormControl type="text" placeholder="description" ref="description"></FormControl>
-          </FormGroup>
+          <div id="description">
+            <label>Description</label>
+            <input type="text" placeholder="description"></input>
+          </div>
 
-          <FormGroup controlId="price">
-            <ControlLabel>Price</ControlLabel>
-            <FormControl type="text" placeholder="price" ref="price"></FormControl>
-          </FormGroup>
-          <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary">Save</Button>
-        </Panel>
-      </Well>
+          <div id="price">
+            <label>Price</label>
+            <input type="text" placeholder="price"></input>
+          </div>
+          <Button onClick={this.handleSubmit.bind(this)} className="primary">Save</Button>
+        </div>
+      </div>
     )
   }
 }
