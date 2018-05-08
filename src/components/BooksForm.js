@@ -51,20 +51,20 @@ class BooksForm extends React.Component {
       <div className="well">
         <div className="panel">
           <div className="form-group" id="title">
-            <label>Title</label>
-            <input type="text" placeholder="title" value={this.state.title} onChange={this.titleChange}></input>
+            <label className="control-label">Title</label>
+            <input className="form-control" type="text" placeholder="title" value={this.state.title} onChange={this.titleChange}></input>
           </div>
 
           <div className="form-group" id="description">
-            <label>Description</label>
-            <input type="text" placeholder="description" value={this.state.description} onChange={this.descriptionChange}></input>
+            <label className="control-label">Description</label>
+            <input className="form-control" type="text" placeholder="description" value={this.state.description} onChange={this.descriptionChange}></input>
           </div>
 
           <div className="form-group" id="price">
-            <label>Price</label>
-            <input type="text" placeholder="price" value={this.state.price} onChange={this.priceChange}></input>
+            <label className="control-label">Price</label>
+            <input className="form-control" type="text" placeholder="price" value={this.state.price} onChange={this.priceChange}></input>
           </div>
-          <button onClick={this.handleSubmit} className="btn-primary">Save</button>
+          <button onClick={this.handleSubmit} className="btn-primary">Save Book</button>
         </div>
       </div>
     )
