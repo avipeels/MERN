@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getBooks } from "../actions/booksActions";
-import { Grid, Col, Row, Button } from "react-bootstrap";
+
 import BookItem from "./BookItem";
 import BooksForm from "./BooksForm";
-
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BookList extends React.Component {
   componentDidMount() {
     //dispatch an action

@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BookItem extends React.Component {
   render() {
     return (
@@ -9,7 +9,7 @@ class BookItem extends React.Component {
             <h6>{this.props.id}</h6>
             <p>{this.props.title}</p>
             <h6>USD.{this.props.price}</h6>
-            <Button className="primary">Buy Now</Button>
+            <button className="btn-primary">Buy Now</button>
           </div>
         </div>
       </div>

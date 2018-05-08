@@ -4,10 +4,13 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: './src/app',
+
+  devtool: 'cheap-eval-source-map',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
   },
+
   watch: true,
   module: {
     rules: [{
@@ -17,7 +20,19 @@ module.exports = {
       options: {
         presets: ['react', 'es2015', 'stage-1']
       }
-    }
+    },
+    {
+      test: /(\.css)$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true
+          }
+        }
+      ]
+    },
     ]
 
   }

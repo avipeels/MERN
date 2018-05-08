@@ -4,17 +4,47 @@ import { bindActionCreators } from "redux";
 import { postBooks } from "../actions/booksActions";
 import { Well, Panel, FormControl, FormGroup, ControlLabel, Button } from "react-bootstrap";
 import ReactDOM from "react-dom";
-
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BooksForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      title: '',
+      description: '',
+      price: '',
+    }
+  }
+  handleSubmit = () => {
 
-  handleSubmit(e) {
-    alert(e);
     const book = [{
-      title: e.target.value,
-      description: this.description.value,
-      price: this.price.value,
+      title: this.state.title,
+      description: this.state.description,
+      price: this.state.price,
     }];
+
     this.props.postBooks(book);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.titleChange = this.titleChange.bind(this);
+    this.descriptionChange = this.descriptionChange.bind(this);
+    this.priceChange = this.priceChange.bind(this);
+
+  }
+  titleChange = (e) => {
+    this.setState({
+      title: e.target.value
+    })
+  }
+
+  descriptionChange = (e) => {
+    this.setState({
+      description: e.target.value
+    })
+  }
+  priceChange = (e) => {
+    this.setState({
+      price: e.target.value
+    })
   }
   render() {
     return (
@@ -22,19 +52,19 @@ class BooksForm extends React.Component {
         <div className="panel">
           <div className="form-group" id="title">
             <label>Title</label>
-            <input type="text" placeholder="title"></input>
+            <input type="text" placeholder="title" value={this.state.title} onChange={this.titleChange}></input>
           </div>
 
-          <div id="description">
+          <div className="form-group" id="description">
             <label>Description</label>
-            <input type="text" placeholder="description"></input>
+            <input type="text" placeholder="description" value={this.state.description} onChange={this.descriptionChange}></input>
           </div>
 
-          <div id="price">
+          <div className="form-group" id="price">
             <label>Price</label>
-            <input type="text" placeholder="price"></input>
+            <input type="text" placeholder="price" value={this.state.price} onChange={this.priceChange}></input>
           </div>
-          <Button onClick={this.handleSubmit.bind(this)} className="primary">Save</Button>
+          <button onClick={this.handleSubmit} className="btn-primary">Save</button>
         </div>
       </div>
     )
