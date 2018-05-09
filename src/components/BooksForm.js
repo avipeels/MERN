@@ -64,7 +64,7 @@ class BooksForm extends React.Component {
             <label className="control-label">Price</label>
             <input className="form-control" type="text" placeholder="price" value={this.state.price} onChange={this.priceChange}></input>
           </div>
-          <button onClick={this.handleSubmit} className="btn-primary">Save Book</button>
+          <button onClick={this.handleSubmit} className="btn-primary">Save Book </button>
         </div>
       </div>
     )

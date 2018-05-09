@@ -5,6 +5,7 @@ import { getBooks } from "../actions/booksActions";
 
 import BookItem from "./BookItem";
 import BooksForm from "./BooksForm";
+import { Cart } from "./Cart";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BookList extends React.Component {
   componentDidMount() {
@@ -26,7 +27,12 @@ class BookList extends React.Component {
     })
     return (
       <div className="grid">
-        < div className="row" style={{ marginTop: '15px' }}>
+
+        <div className="row">
+          <Cart/>
+        </div>
+
+        <div className="row" style={{ marginTop: '15px' }}>
           <div className="col-xs-12 col-xs-6">
             <BooksForm />
           </div>
