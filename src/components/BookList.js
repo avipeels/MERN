@@ -5,7 +5,7 @@ import { getBooks } from "../actions/booksActions";
 
 import BookItem from "./BookItem";
 import BooksForm from "./BooksForm";
-import { Cart } from "./Cart";
+import Cart from "./Cart";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BookList extends React.Component {
   componentDidMount() {

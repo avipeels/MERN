@@ -10,7 +10,7 @@ class Cart extends React.Component {
         }
     }
     renderEmpty() {
-        return (<div></div>)
+        return (<div></div>);
     }
     renderCart() {
         const cartItemList = this.props.cart.map(function (cartArr) {
@@ -24,10 +24,19 @@ class Cart extends React.Component {
                 </div>
             )
         });
-        <div className="panel">
-            {cartItemList}
-        </div>
+        return (
+
+            <div className="panel panel-default">
+                <div className="panel-heading">Cart</div>
+                <div className="panel-body">{cartItemList}</div>
+            </div>
+        );
     }
 
 }
-export default Cart;
+function mapStateToProps(state) {
+    return {
+        cart: state.cart.cart
+    }
+}
+export default connect(mapStateToProps)(Cart);

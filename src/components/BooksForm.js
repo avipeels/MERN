@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { postBooks } from "../actions/booksActions";
 import { Well, Panel, FormControl, FormGroup, ControlLabel, Button } from "react-bootstrap";
-import ReactDOM from "react-dom";
+
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BooksForm extends React.Component {
   constructor() {
