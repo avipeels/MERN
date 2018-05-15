@@ -15,10 +15,22 @@ class Cart extends React.Component {
     renderCart() {
         const cartItemList = this.props.cart.map(function (cartArr) {
             return (
-                <div className="panel" key={cartArr.id}>
+                <div className="panel" key={cartArr._id}>
                     <div className="row">
                         <div className="col-xs-12 col-sm-4">
                             <h6>{cartArr.title}</h6>
+                        </div>
+                        <div className="col-xs-12 col-sm-2">
+                            <h6>{cartArr.price}</h6>
+                        </div>
+                        <div className="col-xs-12 col-sm-2">
+                            <h6>qty. <label className="success"></label></h6>
+                        </div>
+                        <div className="btn-group btn-group-sm">
+                            <button className="btn btn-primary">-</button>
+                            <button className="btn btn-primary">+</button>
+                            <span></span>
+                            <button className="btn btn-danger">DELETE</button>
                         </div>
                     </div>
                 </div>

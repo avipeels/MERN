@@ -1,14 +1,14 @@
 export function booksReducers(state = {
   books:
     [{
-      id: 1,
-      title: 'title',
-      description: 'desc',
+      _id: 1,
+      title: 'title1',
+      description: 'desc1',
       price: 22.22
     }, {
-      id: 2,
-      title: 'title',
-      description: 'desc',
+      _id: 2,
+      title: 'title2',
+      description: 'desc2',
       price: 33.22
     }]
 }, action) {
@@ -29,7 +29,7 @@ export function booksReducers(state = {
       //find index of to be deleted book
       const indexToBeDeleted = currentBooksCopy.findIndex(
         function (book) {
-          return book.id === action.payload.id;
+          return book._id === action.payload._id;
         });
       //slice the array
       return { books: [...currentBooksCopy.slice(0, indexToBeDeleted), ...currentBooksCopy.slice(indexToBeDeleted + 1)] };
@@ -40,7 +40,7 @@ export function booksReducers(state = {
       const currentBooksCopyUpdate = [...state.books];
       //get the id of the book to be updated
       const indexToUpdate = currentBooksCopyUpdate.findIndex(function (book) {
-        return book.id === action.payload.id;
+        return book._id === action.payload._id;
       });
       //update the value of the book
       const updatedBook = { ...currentBooksCopyUpdate[indexToUpdate], title: action.payload.title, description: action.payload.description, price: action.payload.price };
