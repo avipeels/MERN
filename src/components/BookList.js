@@ -26,13 +26,13 @@ class BookList extends React.Component {
       )
     })
     return (
-      <div className="grid">
+      <div className="">
 
-        <div className="row">
-          <Cart/>
+        <div className="col-xs-12 col-xs-6 col-md-12 col-lg-12">
+          <Cart />
         </div>
 
-        <div className="row" style={{ marginTop: '15px' }}>
+        <div className="" style={{ marginTop: '15px' }}>
           <div className="col-xs-12 col-xs-6">
             <BooksForm />
           </div>

@@ -20,7 +20,7 @@ export function cartReducers(state = { cart: [] }, action) {
         quantity: currentCartItemToUpdate[indexToUpdate].quantity + action.unit
       }
 
-      let updatedCart = [...currentCartItemToUpdate.slice(0, indexToUpdate), newBookToUpdate, currentCartItemToUpdate.slice(indexToUpdate + 1)]
+      let updatedCart = [...currentCartItemToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentCartItemToUpdate.slice(indexToUpdate + 1)]
       return {
         ...state,
         cart: updatedCart

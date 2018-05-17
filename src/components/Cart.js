@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { deleteCartItem } from "../actions/cartActions";
+import { deleteCartItem, addToCart, updateCart } from "../actions/cartActions";
 import { Well, Panel, FormControl, FormGroup, ControlLabel, Button, Label } from "react-bootstrap";
 class Cart extends React.Component {
+
   onDelete(_id) {
     const currentBookToBeDeleted = this.props.cart;
     //find index of to be deleted book
@@ -15,6 +16,16 @@ class Cart extends React.Component {
     let cartAfterDelete = [...currentBookToBeDeleted.slice(0, indexToBeDeleted), ...currentBookToBeDeleted.slice(indexToBeDeleted + 1)];
     this.props.deleteCartItem(cartAfterDelete);
   }
+
+  onIncrement(_id) {
+    this.props.updateCart(_id, 1);
+  }
+
+  onDecrement(_id, quantity) {
+    if (quantity > 1)
+      this.props.updateCart(_id, -1);
+  }
+
   render() {
     if (this.props.cart[0]) {
       return this.renderCart();
@@ -30,7 +41,7 @@ class Cart extends React.Component {
     const cartItemList = this.props.cart.map(function (cartArr) {
       return (
         <div className="panel" key={cartArr._id}>
-          <div className="row">
+          <div className="">
             <div className="col-xs-12 col-sm-4">
               <h6>{cartArr.title}</h6>
             </div>
@@ -41,8 +52,8 @@ class Cart extends React.Component {
               <h6>qty. <Label bsStyle="success">{cartArr.quantity}</Label></h6>
             </div>
             <div className="btn-group btn-group-sm">
-              <button className="btn btn-primary">-</button>
-              <button className="btn btn-primary">+</button>
+              <button className="btn btn-primary" onClick={this.onDecrement.bind(this, cartArr._id, cartArr.quantity)}>-</button>
+              <button className="btn btn-primary" onClick={this.onIncrement.bind(this, cartArr._id)}>+</button>
               <span></span>
               <button className="btn btn-danger" onClick={this.onDelete.bind(this, cartArr._id)} >DELETE</button>
             </div>
@@ -67,7 +78,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    deleteCartItem: deleteCartItem
+    deleteCartItem: deleteCartItem,
+    addToCart: addToCart,
+    updateCart: updateCart
   }, dispatch);
 }
 
