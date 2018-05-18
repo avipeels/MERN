@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { postBooks } from "../actions/booksActions";
+import { findDOMNode } from "react-dom";
+import { postBooks, deleteBook } from "../actions/booksActions";
 import { Well, Panel, FormControl, FormGroup, ControlLabel, Button } from "react-bootstrap";
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -46,7 +47,16 @@ class BooksForm extends React.Component {
       price: e.target.value
     })
   }
+  onDelete() {
+    let bookId = findDOMNode(this.refs.delete).value;
+    this.props.deleteBook(bookId);
+  }
   render() {
+    const booksList = this.props.books.map(function (booksArr) {
+      return (
+        <option key={booksArr._id}>{booksArr._id}</option>
+      )
+    })
     return (
       <div className="well">
         <div className="panel">
@@ -66,11 +76,30 @@ class BooksForm extends React.Component {
           </div>
           <button onClick={this.handleSubmit} className="btn-primary">Save Book </button>
         </div>
+
+        <div className="panel" style={{ marginTop: '25px' }}>
+          <FormGroup controlId="formControlsSelect">
+            <ControlLabel>Select a book id to delete</ControlLabel>
+            <FormControl ref="delete" componentClass="select" placeholder="select">
+              <option value="select">select</option>
+              {booksList}
+            </FormControl>
+          </FormGroup>
+          <Button onClick={this.onDelete.bind(this)} bsStyle="danger">Delete Book</Button>
+        </div>
       </div>
     )
   }
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ postBooks }, dispatch);
+function mapStateToProps(state) {
+  return {
+    books: state.books.books
+  }
 }
-export default connect(null, mapDispatchToProps)(BooksForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    postBooks,
+    deleteBook
+  }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);

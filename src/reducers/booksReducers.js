@@ -29,7 +29,7 @@ export function booksReducers(state = {
       //find index of to be deleted book
       const indexToBeDeleted = currentBooksCopy.findIndex(
         function (book) {
-          return book._id === action.payload._id;
+          return book._id == action.payload;
         });
       //slice the array
       return { books: [...currentBooksCopy.slice(0, indexToBeDeleted), ...currentBooksCopy.slice(indexToBeDeleted + 1)] };

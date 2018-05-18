@@ -8,8 +8,8 @@ import reducers from "./reducers/index";
 //import actions
 import { addToCart } from "./actions/cartActions";
 import { postBooks, deleteBook, updateBook } from "./actions/booksActions";
-
-
+//react router
+import { Route, Router, IndexRoute, browserHistory } from "react-router";
 
 //step1 - create store
 //step2 - create actions and dispatch them
@@ -19,37 +19,24 @@ const middleWare = applyMiddleware(logger);
 const store = createStore(reducers, middleWare);
 
 import BookList from "./components/BookList";
+import Menu from "./components/Menu";
+import Footer from "./components/Footer";
+import Cart from "./components/Cart";
+import BooksForm from "./components/BooksForm";
+import Main from './Main'
+const Routes = (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Main} />
+      <IndexRoute component={BookList} />
+      <Route path="/admin" component={BooksForm} />
+      <Route path="/cart" component={Cart} />
+    </Router>
+  </Provider>
+)
 // BOOK ACTIONS
 render(
-  <Provider store={store}>
-    <BookList />
-  </Provider>, document.getElementById('app'));
-
-//action create for posting
-// store.dispatch(postBooks(
-//   [{
-//     id: 1,
-//     title: 'title',
-//     description: 'desc',
-//     price: 22.22
-//   }, {
-//     id: 2,
-//     title: 'title',
-//     description: 'desc',
-//     price: 33.22
-//   }]
-// ));
-
-// //action for deleting
-// store.dispatch(deleteBook({ id: 2 }))
-
-// //action for update
-// store.dispatch(updateBook({ id: 1, title: 'updated 1 title', description: 'desc1', price: 11.22 }));
-
-// //CART ACTIONS
-
-// //action to add to cart
-// store.dispatch(addToCart([{ cart_id: 2 }]));
+  Routes, document.getElementById('app'));
 
 
 
