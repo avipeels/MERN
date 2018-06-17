@@ -5,7 +5,7 @@ import { findDOMNode } from "react-dom";
 import { postBooks, deleteBook } from "../actions/booksActions";
 import { Well, Panel, FormControl, FormGroup, ControlLabel, Button } from "react-bootstrap";
 
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 class BooksForm extends React.Component {
   constructor() {
     super();
@@ -14,7 +14,7 @@ class BooksForm extends React.Component {
       description: '',
       price: '',
     }
-  }
+  };
   handleSubmit = () => {
 
     const book = [{

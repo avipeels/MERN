@@ -3,9 +3,9 @@ var path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/app',
+  entry: './src/app.js',
 
-  devtool: 'cheap-eval-source-map',
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
@@ -16,9 +16,9 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'babel-loader',
-      options: {
-        presets: ['react', 'es2015', 'stage-1']
+      use: {
+        loader: 'babel-loader',
+       
       }
     },
     {

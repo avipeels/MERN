@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from "react";
 import { render } from "react-dom";
 import { applyMiddleware, createStore } from "redux";
@@ -25,25 +26,24 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import BooksForm from "./components/BooksForm";
 import Main from './Main';
-const Routes = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <div>
-        <Menu />
-        <Switch>
-          <Route exact path="/" component={BookList} />
-          <Route path="/admin" component={BooksForm} />
-          <Route path="/cart" component={Cart} />
-        </Switch>
-        <Footer />
-      </div>
-    </BrowserRouter>
 
-  </Provider>
-)
 // BOOK ACTIONS
-render(
-  Routes, document.getElementById('app'));
+if (typeof window !== 'undefined') {
 
+  render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <Main/>
+          
+            <Route exact path="/" component={BookList} />
+            <Route exact  path="/admin" component={BooksForm} />
+            <Route exact  path="/cart" component={Cart} />
+            <Footer />
+        </div>
+      </BrowserRouter>
+
+    </Provider>, document.getElementById('app'));
+}
 
 
