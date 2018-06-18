@@ -1,8 +1,15 @@
 //post a book
+import axios from 'axios';
+
 export function postBooks(books) {
-  return {
-    type: 'POST_BOOK',
-    payload: books
+  return function (dispatch) {
+    axios.post('/books', books)
+      .then(function (response) {
+        dispatch({ type: "POST_BOOK", payload: response.data })
+      })
+      .catch(function (err) {
+        dispatch({ type: "POST_BOOK_REJECTED", payload: "Error in posting new book" });
+      })
   }
 }
 

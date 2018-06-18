@@ -3,6 +3,7 @@ import React from "react";
 import { render } from "react-dom";
 import { applyMiddleware, createStore } from "redux";
 import { logger } from "redux-logger";
+import thunk from 'redux-thunk';
 import { Provider } from "react-redux";
 //import reducers
 import reducers from "./reducers/index";
@@ -17,7 +18,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 //step2 - create actions and dispatch them
 //step3 - define reducer
 
-const middleWare = applyMiddleware(logger);
+const middleWare = applyMiddleware(thunk,logger());
 const store = createStore(reducers, middleWare);
 
 import BookList from "./components/BookList";
@@ -37,8 +38,8 @@ if (typeof window !== 'undefined') {
           <Main/>
           
             <Route exact path="/" component={BookList} />
-            <Route exact  path="/admin" component={BooksForm} />
-            <Route exact  path="/cart" component={Cart} />
+            <Route exact path="/admin" component={BooksForm} />
+            <Route exact path="/cart" component={Cart} />
             <Footer />
         </div>
       </BrowserRouter>
