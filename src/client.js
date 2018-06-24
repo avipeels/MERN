@@ -18,7 +18,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 //step2 - create actions and dispatch them
 //step3 - define reducer
 
-const middleWare = applyMiddleware(thunk,logger());
+const middleWare = applyMiddleware(thunk,logger);
 const store = createStore(reducers, middleWare);
 
 import BookList from "./components/BookList";

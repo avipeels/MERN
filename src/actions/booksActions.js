@@ -3,8 +3,9 @@ import axios from 'axios';
 
 export function postBooks(books) {
   return function (dispatch) {
-    axios.post('/books', books)
+    axios.post('/api/books', books)
       .then(function (response) {
+        console.log("in books action");
         dispatch({ type: "POST_BOOK", payload: response.data })
       })
       .catch(function (err) {
@@ -13,11 +14,29 @@ export function postBooks(books) {
   }
 }
 
+//get a book
+export function getBooks() {
+  return function (dispatch) {
+    axios.get('/api/books')
+      .then(function (response) {
+        dispatch({ type: "GET_BOOKS", payload: response.data });
+      })
+      .catch(function (err) {
+        dispatch({ type: "GET_BOOKS_REJECTED", payload: err });
+      })
+  }
+}
+
 //delete a book
 export function deleteBook(id) {
-  return {
-    type: 'DELETE_BOOK',
-    payload: id
+  return function (dispatch) {
+    axios.delete('/api/books/' + id)
+      .then(function (response) {
+        dispatch({ type: "DELETE_BOOK", payload: id });
+      })
+      .catch(function (err) {
+        dispatch({ type: "DELETE_BOOK_REJECTED", payload: err });
+      })
   }
 }
 
@@ -29,9 +48,4 @@ export function updateBook(book) {
   }
 }
 
-//get a book
-export function getBooks() {
-  return {
-    type: 'GET_BOOKS',
-  }
-}
+

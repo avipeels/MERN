@@ -15,8 +15,9 @@ class BookList extends React.Component {
   render() {
     const bookList = this.props.books.map(function (booksArr) {
       return (
-        <div className="col-xs-12 col-sm-6 col-sm-4" key={booksArr._id}>
+        <div className="col-xs-12 col-sm-6 col-sm-4" >
           <BookItem
+            key={booksArr._title}
             _id={booksArr._id}
             title={booksArr.title}
             description={booksArr.description}
