@@ -69,6 +69,7 @@ app.put('/books/:_id', function (req, res) {
       price: book.price
     }
   };
+
   var options = { new: true };
   Books.findOneAndUpdate(query, update, options, function (err, book) {
     if (err) {

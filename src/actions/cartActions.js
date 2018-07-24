@@ -13,10 +13,22 @@ export function deleteCartItem(cart) {
   }
 }
 //UPDATE THE CART
-export function updateCart(_id, unit) {
+export function updateCart(_id, unit, cart) {
+  const currentCartItemToUpdate = cart;
+  const indexToUpdate = currentCartItemToUpdate.findIndex(
+    function (book) {
+      return book._id === _id;
+    }
+  )
+  const newBookToUpdate = {
+    ...currentCartItemToUpdate[indexToUpdate],
+    quantity: currentCartItemToUpdate[indexToUpdate].quantity + unit,
+
+  }
+
+  let updatedCart = [...currentCartItemToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentCartItemToUpdate.slice(indexToUpdate + 1)]
   return {
     type: 'UPDATE_CART',
-    _id: _id,
-    unit: unit
+    payload: updatedCart
   }
 }
