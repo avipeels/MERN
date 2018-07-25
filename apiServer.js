@@ -3,6 +3,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
+//handle session for the user cart
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 var app = express();
 // "proxy": {
@@ -26,6 +29,41 @@ app.use(cookieParser());
 //APIs Start
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, '# Mongo db connection error'));
+
+//set up sessions
+
+app.use(session({
+  secret: 'mySecretString',
+  saveUninitialized: false,
+  resave: false,//so that the session will not be resaved
+  cookie: { maxAge: 2 * 24 * 60 * 60 * 1000 },
+  store: new MongoStore({ mongooseConnection: db, ttl: 2 * 24 * 60 * 60 })
+}))
+
+//post session cart values
+
+app.post('/cart', function (req, res) {
+  var cart = req.body;
+  req.session.cart = cart;
+  req.session.save(function (err) {
+    if (err) {
+      throw err;
+    }
+    res.json(req.session.cart)
+  })
+})
+
+//get cart from session
+
+app.get('/cart', function (req, res) {
+  if (typeof req.session.cart !== 'undefined') {
+    res.json(req.session.cart);
+  }
+})
+
 var Books = require('./models/books');
 
 
@@ -78,6 +116,26 @@ app.put('/books/:_id', function (req, res) {
     res.json(book);
   });
 });
+
+//image api - this will help understanding how to handle file system
+
+app.get('/images', function (req, res) {
+  const imgFolder = __dirname + '/public/images/';
+  const fs = require('fs');
+  //read all files in the directory
+  fs.readdir(imgFolder, function (err, files) {
+    if (err) {
+      return console.error(err);
+    }
+    const fileArr = [];
+
+    files.forEach(function (file) {
+      fileArr.push({ name: file })
+    })
+    res.json(fileArr);
+  })
+})
+
 //APIs End
 app.listen(3001, function (err) {
   if (err) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { deleteCartItem, addToCart, updateCart } from "../actions/cartActions";
+import { deleteCartItem, addToCart, updateCart, getCart } from "../actions/cartActions";
 import { Modal, Well, Panel, FormControl, FormGroup, ControlLabel, Button, Label } from "react-bootstrap";
 class Cart extends React.Component {
     constructor() {
@@ -9,6 +9,9 @@ class Cart extends React.Component {
         this.state = {
             showModal: false
         }
+    }
+    componentDidMount(){
+        this.props.getCart();
     }
     open() {
         this.setState({
@@ -121,7 +124,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         deleteCartItem: deleteCartItem,
         addToCart: addToCart,
-        updateCart: updateCart
+        updateCart: updateCart,
+        getCart: getCart
     }, dispatch);
 }
 
