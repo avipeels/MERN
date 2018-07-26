@@ -21,6 +21,7 @@ class BookList extends React.Component {
             _id={booksArr._id}
             title={booksArr.title}
             description={booksArr.description}
+            img={booksArr.img}
             price={booksArr.price}
           />
         </div>
@@ -28,15 +29,7 @@ class BookList extends React.Component {
     })
     return (
       <div className="">
-
-        <div className="col-xs-12 col-xs-6 col-md-12 col-lg-12">
-          <Cart />
-        </div>
-
         <div className="" style={{ marginTop: '15px' }}>
-          <div className="col-xs-12 col-xs-6">
-            <BooksForm />
-          </div>
           {bookList}
         </div>
       </div>

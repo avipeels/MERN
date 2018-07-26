@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addToCart, updateCart } from "../actions/cartActions";
 import { bindActionCreators } from "redux";
-
+import { Image } from "react-bootstrap"
 
 
 class BookItem extends React.Component {
@@ -12,6 +12,7 @@ class BookItem extends React.Component {
       _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
+      img: this.props.img,
       price: this.props.price,
       quantity: 1
     }];
@@ -39,12 +40,16 @@ class BookItem extends React.Component {
     return (
       <div className="well">
         <div className="row">
+          <div className="col-xs-12 col-sm-4">
+            <Image src={this.props.img} responsive />
+          </div>
           <div className="col-xs-12">
             <h6>{this.props.title}</h6>
             <p>{this.props.description}</p>
             <h6>USD.{this.props.price}</h6>
             <button className="btn-primary" onClick={this.handleCart.bind(this)}>Buy Now</button>
           </div>
+
         </div>
       </div>
     )
