@@ -21,7 +21,7 @@ class BookList extends React.Component {
             _id={booksArr._id}
             title={booksArr.title}
             description={booksArr.description}
-            img={booksArr.img}
+            images={booksArr.images}
             price={booksArr.price}
           />
         </div>

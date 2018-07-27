@@ -48,4 +48,12 @@ export function updateBook(book) {
   }
 }
 
+//reset the button
+
+export function resetButton() {
+  return {
+    type: 'RESET_BUTTON',
+  }
+}
+
 

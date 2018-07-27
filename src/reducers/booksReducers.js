@@ -1,5 +1,5 @@
 export function booksReducers(state = {
-  books:    []
+  books: []
 }, action) {
   switch (action.type) {
     case 'GET_BOOKS':
@@ -9,9 +9,31 @@ export function booksReducers(state = {
     case 'POST_BOOK':
       // let books = state.books.concat(action.payload);
       // return { books };
-      return { books: [...state.books, ...action.payload] }
+      return {
+        ...state,
+        books: [...state.books, ...action.payload],
+        msg: 'Saved! Click to continue',
+        style: 'success'
+      }
       break;
-
+    case 'POST_BOOK_REJECTED':
+      // let books = state.books.concat(action.payload);
+      // return { books };
+      return {
+        ...state,
+        msg: 'Please try again',
+        style: 'btn-danger'
+      }
+      break;
+    case 'RESET_BUTTON':
+      // let books = state.books.concat(action.payload);
+      // return { books };
+      return {
+        ...state,
+        msg: null,
+        style: 'primary'
+      }
+      break;
     case 'DELETE_BOOK':
       //create a copy
       const currentBooksCopy = [...state.books];

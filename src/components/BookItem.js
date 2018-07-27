@@ -12,7 +12,7 @@ class BookItem extends React.Component {
       _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
-      img: this.props.img,
+      images: this.props.images,
       price: this.props.price,
       quantity: 1
     }];
@@ -41,9 +41,9 @@ class BookItem extends React.Component {
       <div className="well">
         <div className="row">
           <div className="col-xs-12 col-sm-4">
-            <Image src={this.props.img} responsive />
+            <Image src={this.props.images} responsive />
           </div>
-          <div className="col-xs-12">
+          <div className="col-xs-12 col-sm-4">
             <h6>{this.props.title}</h6>
             <p>{this.props.description}</p>
             <h6>USD.{this.props.price}</h6>

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { findDOMNode } from "react-dom";
-import { postBooks, deleteBook, getBooks } from "../actions/booksActions";
+import { postBooks, deleteBook, getBooks, resetButton } from "../actions/booksActions";
 import { MenuItem, InputGroup, DropdownButton, Image, Col, Row, Well, Panel, FormControl, FormGroup, ControlLabel, Button } from "react-bootstrap";
 import axios from "axios";
 // import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +32,7 @@ class BooksForm extends React.Component {
     const book = [{
       title: this.state.title,
       description: this.state.description,
-      images:this.state.images,
+      images: this.state.img,
       price: this.state.price,
     }];
 
@@ -43,6 +43,7 @@ class BooksForm extends React.Component {
     this.descriptionChange = this.descriptionChange.bind(this);
     this.priceChange = this.priceChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.resetButton = this.resetButton.bind(this);
   }
   titleChange = (e) => {
     this.setState({
@@ -67,6 +68,15 @@ class BooksForm extends React.Component {
   handleSelect(image) {
     this.setState({ img: '/images/' + image })
   }
+  resetButton() {
+    this.props.resetButton();
+    this.setState({
+      title: '',
+      description: '',
+      img: '',
+      price: '',
+    })
+  }
   render() {
     const booksList = this.props.books.map(function (booksArr) {
       return (
@@ -75,9 +85,9 @@ class BooksForm extends React.Component {
     });
     const imgList = this.state.images.map(function (imgArr, i) {
       return (
-        <MenuItem key={i} eventKey={imgArr.name} onClick={this.handleSelect.bind(this,imgArr.name)}>{imgArr.name}</MenuItem>
+        <MenuItem key={i} eventKey={imgArr.name} onClick={this.handleSelect.bind(this, imgArr.name)}>{imgArr.name}</MenuItem>
       )
-    },this)
+    }, this)
     return (
       <div className="well">
         <div className="row">
@@ -111,7 +121,10 @@ class BooksForm extends React.Component {
                 <label className="control-label">Price</label>
                 <input className="form-control" type="text" placeholder="price" value={this.state.price} onChange={this.priceChange}></input>
               </div>
-              <button onClick={this.handleSubmit} className="btn-primary">Save Book </button>
+              <button
+                onClick={(!this.props.msg) ? (this.handleSubmit) : (this.resetButton)}
+
+                className={(!this.props.style) ? ("btn-primary") : (`btn-${this.props.style}`)}>{(!this.props.msg) ? ("Save Book") : (this.props.msg)}</button>
             </div>
 
             <div className="panel" style={{ marginTop: '25px' }}>
@@ -133,13 +146,17 @@ class BooksForm extends React.Component {
 }
 function mapStateToProps(state) {
   return {
-    books: state.books.books
+    books: state.books.books,
+    msg: state.books.msg,
+    style: state.books.style
   }
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     postBooks,
-    deleteBook, getBooks
+    deleteBook,
+    getBooks,
+    resetButton
   }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);
